@@ -246,6 +246,30 @@ Run the following commands to upload your files:
 
 Run the inference on eval set after fetching the models from GCS Output Artifacts Bucket
 
+### Copy model from Bucket
+```python
+! gsutil cp {BUCKET_URI}/{MODEL_ARTIFACT_DIR}/model.joblib .
+```
+### Load model
+```python
+model = joblib.load(model, "./model.joblib")
+```
+
+### Evaluating the Performance
+
+#### Eval set
+```python
+prediction=model.predict(X_eval)
+print('The accuracy of the Decision Tree is',"{:.3f}".format(metrics.accuracy_score(prediction,y_eval)))
+```
+
+#### Test set
+```python
+prediction=model.predict(X_test)
+print('The accuracy of the Decision Tree is',"{:.3f}".format(metrics.accuracy_score(prediction,y_test)))
+```
+
+
 ## 5. Run this Training and inference for 2 times resulting in two output artifact folders in Google cloud storage bucket
 Run step 3 and 4 again
 
